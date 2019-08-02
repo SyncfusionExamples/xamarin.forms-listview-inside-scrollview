@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoFitSample.MainPage"
+             xmlns:local="clr-namespace:AutoFitSample"
+             xmlns:sync="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms">
+    <ContentPage.BindingContext>
+        <local:ListViewAutoFitContentViewModel x:Name="ViewModel"/>
+    </ContentPage.BindingContext>
+
+    <local:ExtScrollView x:Name="scrollView" >
+        <StackLayout x:Name="StackLayout">
+            <Button Text="Component1" HeightRequest="100" x:Name="btn1"/>
+            <Button Text="Component2" HeightRequest="100" x:Name="btn2"/>
+            <sync:SfListView x:Name="listView" GroupHeaderSize="40" AllowGroupExpandCollapse="True"
+                         AutoFitMode="Height" ItemSize="100" ItemsSource="{Binding BookInfo}"
+                         SelectionMode="Multiple" SelectionBackgroundColor="#d3d3d3">
+                <sync:SfListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Grid WidthRequest="100">
+                                        <Label Text="This is the part which defines that the SfListView is working fine" LineBreakMode="WordWrap"
+                                         FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="20,0,0,0" />
+                                    </Grid>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </sync:SfListView.HeaderTemplate>
+
+                <sync:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding BookNumber}" Grid.Column="0" Grid.Row="0" FontAttributes="Italic"/>
+                            <Label Text="{Binding BookName}" Grid.Column="1" Grid.Row="0" FontAttributes="Italic"/>
+                            <Label Text="{Binding BookDescription}" Grid.Row="1" Grid.ColumnSpan="2" TextColor="#474747" VerticalTextAlignment="Center" />
+                            <BoxView Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="1" BackgroundColor="Black" />
+                        </Grid>
+                    </DataTemplate>
+                </sync:SfListView.ItemTemplate>
+            </sync:SfListView>
+        </StackLayout>
+    </local:ExtScrollView>
+</ContentPage>
